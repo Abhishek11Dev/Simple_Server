@@ -24,13 +24,16 @@ var server = http.createServer(function (req, res) {   //create web server
 	if (req.url == '/') { //check the URL of the current request
         
         // set response header
-        res.writeHead(200, { 'Content-Type': 'text/html' }); 
-        
-        // set response content    
-        res.write('<html><body><p>Welcome</p></body></html>');
+         
+         client.get('count', function(err, reply) {
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+          res.write('<html><body><p>Welcome</p></body></html>');
         res.write('<html><body><p>This is home Page.</p></body></html>');
-        res.write('<html><body><p>you can check total number of request by adding "/admin" to address bar</p></body></html>');
-        res.end();
+        res.write('<html><body><p></p></body></html>');
+        res.write('<html><body><p>Total number of requests are </p></body></html>'+reply);
+           // res.write(reply)
+            res.end();
+         });
     
     }
     else if (req.url == "/login") {
